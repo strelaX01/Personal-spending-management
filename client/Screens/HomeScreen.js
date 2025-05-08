@@ -176,16 +176,12 @@ const HomeScreen = () => {
       getToken();
       if (token) {
         fetchData(activeTab);
-        fetchTotalAmount(); 
+        fetchTotalAmount();
       }
     }, [token, getToken, fetchData, fetchTotalAmount, activeTab])
   );
 
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
   const totalPlanAmountMemo = useMemo(() => {
     if (activeTab === 'Expense' && expensePlanData) {
       return expensePlanData.reduce((acc, item) => acc + item.amount, 0);
@@ -322,7 +318,6 @@ const HomeScreen = () => {
 
   const handleEdit = useCallback((item) => {
     const screen = activeTab === 'Income' ? 'EditIncome' : 'EditExpense';
-<<<<<<< HEAD
     navigation.navigate(screen, {
       data: item,
       onGoBack: async () => {
@@ -330,15 +325,6 @@ const HomeScreen = () => {
           await fetchTotalAmount();
         }
         fetchData(activeTab);
-=======
-    navigation.navigate(screen, { 
-      data: item, 
-      onGoBack: async () => {
-        if (activeTab === 'Income') {
-          await fetchTotalAmount(); 
-        }
-        fetchData(activeTab); 
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
       }
     });
     if (openItemId === item.id) {
@@ -374,11 +360,7 @@ const HomeScreen = () => {
             if (updatedData.length === 0) setTotalAmount(0);
             return updatedData;
           });
-<<<<<<< HEAD
           await fetchTotalAmount();
-=======
-          await fetchTotalAmount(); 
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
         } else {
           setExpenseData((prev) => {
             const updatedData = prev.filter((data) => data.id !== itemToDelete.id);
@@ -489,7 +471,7 @@ const HomeScreen = () => {
                 <Text style={styles.remainingtext} adjustsFontSizeToFit numberOfLines={1}>
                   {totalIncomeAmount > totalPlanAmount ? 'Thu nhập vượt kế hoạch' : 'Mục tiêu còn thiếu'}
                 </Text>
-                <Text style={[styles.totalRevenueNumber, { color: totalIncomeAmount >= totalPlanAmount ? '#000000' : '#EEB422'},
+                <Text style={[styles.totalRevenueNumber, { color: totalIncomeAmount >= totalPlanAmount ? '#000000' : '#EEB422' },
                 ]}
                   adjustsFontSizeToFit
                   numberOfLines={1}

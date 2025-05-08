@@ -139,16 +139,12 @@ const EditIncomeScreen = ({ route }) => {
 
       if (response.status === 200) {
         setConfirmationMessage('Cập nhật thu nhập thành công');
-<<<<<<< HEAD
         setConfirmationModalVisible(true);
-=======
-        setConfirmationModalVisible4(true);
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
-      } 
+      }
 
     } catch (error) {
       if (error.response) {
-        if (error.response.status === 401 ) {
+        if (error.response.status === 401) {
           setModalMessage(error.response.data.message);
           setModalVisible(true);
         } else {
@@ -178,14 +174,9 @@ const EditIncomeScreen = ({ route }) => {
         token: token,
         income_id: data.id,
       };
-
-<<<<<<< HEAD
       const response = await axios.post('http://10.0.2.2:3000/api/transaction/confirmEditIncome', updatedIncome);
-=======
-      const response = await axios.post('http://10.0.2.2:3000/confirmEditIncome', updatedIncome);
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
 
-      if (response.status === 200 ) {
+      if (response.status === 200) {
         setConfirmationMessage('Thu nhập đã được cập nhật thành công sau khi xác nhận!');
         setConfirmationModalVisible(true);
       } else {
@@ -348,13 +339,8 @@ const EditIncomeScreen = ({ route }) => {
               <TouchableOpacity
                 style={[styles.button, styles.buttonConfirm]}
                 onPress={() => {
-<<<<<<< HEAD
-                  setModalVisible(false); // Close the modal
-                  confirmEdit(); // Proceed with confirmation
-=======
-                  setModalVisible(false); 
+                  setModalVisible(false);
                   confirmEdit(); 
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
                 }}
               >
                 <Text style={styles.textStyle}>Tiếp tục</Text>
@@ -379,8 +365,8 @@ const EditIncomeScreen = ({ route }) => {
             <TouchableOpacity
               style={[styles.button, styles.buttonConfirm]}
               onPress={() => {
-                setConfirmationModalVisible(false); 
-                navigation.goBack(); 
+                setConfirmationModalVisible(false);
+                navigation.goBack();
               }}
             >
               <Text style={styles.textStyle}>OK</Text>
@@ -406,7 +392,7 @@ export default EditIncomeScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
   },
   header: {
     flexDirection: 'row',
@@ -416,12 +402,12 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
   headerText: {
-    color: '#000000', 
+    color: '#000000',
     fontSize: 18,
     fontWeight: 'bold',
   },
   addText: {
-    color: '#000000', 
+    color: '#000000',
     fontSize: 18,
     fontWeight: 'bold',
   },
@@ -439,14 +425,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   expenseInput: {
-    color: '#000000', 
+    color: '#000000',
     padding: 15,
     fontSize: 16,
     width: '90%',
-    backgroundColor: '#DDDDDD', 
+    backgroundColor: '#DDDDDD',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#CCCCCC', 
+    borderColor: '#CCCCCC',
     marginLeft: 10,
   },
   categoryContainer: {
@@ -462,11 +448,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoryText: {
-<<<<<<< HEAD
     color: '#000000', 
-=======
-    color: '#000000',
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     fontSize: 16,
     marginRight: 10,
   },
@@ -479,14 +461,14 @@ const styles = StyleSheet.create({
   },
   categoryButtonList: {
     width: '22%',
-    backgroundColor: '#DDDDDD', 
+    backgroundColor: '#DDDDDD',
     padding: 10,
     borderRadius: 10,
     margin: 5,
     alignItems: 'center',
   },
   categoryName: {
-    color: '#000000', 
+    color: '#000000',
     fontSize: 12,
     textAlign: 'center',
     marginTop: 5,
@@ -510,17 +492,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   backDateIcon: {
-    color: '#000000', 
+    color: '#000000',
   },
   forwardDateIcon: {
-    color: '#000000', 
+    color: '#000000',
   },
   dateText: {
-    color: '#000000', 
+    color: '#000000',
     fontSize: 16,
   },
   dateTimePicker: {
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
     borderRadius: 10,
     padding: 10,
     width: '90%',
@@ -538,14 +520,14 @@ const styles = StyleSheet.create({
 
   },
   noteInput: {
-    color: '#000000', 
+    color: '#000000',
     padding: 15,
     fontSize: 16,
     width: '90%',
-    backgroundColor: '#DDDDDD', 
+    backgroundColor: '#DDDDDD',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#CCCCCC', 
+    borderColor: '#CCCCCC',
     marginLeft: 10,
   },
   modalContainer: {
@@ -556,7 +538,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
@@ -590,7 +572,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2196F3',
   },
   textStyle: {
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     fontWeight: 'bold',
     textAlign: 'center',
   },

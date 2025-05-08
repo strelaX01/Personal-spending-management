@@ -13,9 +13,9 @@ const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     // Bắt đầu từ 0, phóng to đến 1.3 (lớn hơn kích thước cuối), sau đó thu nhỏ về 1.0
     logoScale.value = withSequence(
-      withTiming(1.3, { 
-        duration: 1200, 
-        easing: Easing.out(Easing.exp) 
+      withTiming(1.3, {
+        duration: 1200,
+        easing: Easing.out(Easing.exp)
       }),
       withTiming(1.0, {
         duration: 300,
@@ -23,40 +23,16 @@ const SplashScreen = ({ navigation }) => {
       })
     );
 
-<<<<<<< HEAD
-    logoScale.value = withSequence(
-      withTiming(1.3, { 
-        duration: 1200, 
-        easing: Easing.out(Easing.exp) 
-      }),
-      withTiming(1.0, {
-        duration: 300,
-        easing: Easing.inOut(Easing.ease)
-      })
-    );
-
-=======
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     const networkListener = NetInfo.addEventListener(state => {
       if (!isMounted.current) return;
       handleNetworkChange(state.isConnected);
     });
 
-<<<<<<< HEAD
-
     NetInfo.fetch().then(state => {
       if (!isMounted.current) return;
       handleNetworkChange(state.isConnected);
     });
-
-=======
-    // Kiểm tra ngay lập tức khi mount
-    NetInfo.fetch().then(state => {
-      if (!isMounted.current) return;
-      handleNetworkChange(state.isConnected);
-    });
-
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
+    
     return () => {
       isMounted.current = false;
       networkListener();
@@ -66,7 +42,7 @@ const SplashScreen = ({ navigation }) => {
 
   const handleNetworkChange = (connected) => {
     setModalVisible(!connected);
-    
+
     if (connected) {
       startLoginCheck();
     } else {
@@ -76,13 +52,13 @@ const SplashScreen = ({ navigation }) => {
 
   const startLoginCheck = async () => {
     cancelLoginCheck();
-    
+
     try {
       const userToken = await AsyncStorage.getItem('token');
-      
+
       timeoutRef.current = setTimeout(async () => {
         const currentState = await NetInfo.fetch();
-        
+
         if (currentState.isConnected) {
           navigateUser(userToken);
         } else {
@@ -109,7 +85,7 @@ const SplashScreen = ({ navigation }) => {
   const handleRetry = async () => {
     console.log('Retry button pressed');
     const state = await NetInfo.fetch();
-    
+
     if (state.isConnected) {
       setModalVisible(false);
       startLoginCheck();
@@ -149,9 +125,9 @@ const SplashScreen = ({ navigation }) => {
       </Modal>
 
       <View style={styles.logoContainer}>
-        <Animated.Image 
-          source={require('../assets/Logo/PennyRoot-Logo.png')} 
-          style={[styles.logo, logoAnimatedStyle]} 
+        <Animated.Image
+          source={require('../assets/Logo/PennyRoot-Logo.png')}
+          style={[styles.logo, logoAnimatedStyle]}
           resizeMode="contain"
         />
       </View>
@@ -167,8 +143,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoContainer: {
-    width: '90%',  
-    height: 300,  
+    width: '90%',
+    height: 300,
   },
   logo: {
     flex: 1,

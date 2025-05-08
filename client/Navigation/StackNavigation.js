@@ -35,40 +35,6 @@ const StackNavigation = () => {
     const Stack = createNativeStackNavigator();
     const Tab = createBottomTabNavigator();
 
-    // // Hiệu ứng chuyển cảnh từ phải sang trái
-    // const forSlide = ({ current, next, inverted, layouts: { screen } }) => {
-    //     console.log('forSlide called', { current, next });
-    //     const translateX = Animated.multiply(
-    //         Animated.add(
-    //             current.progress.interpolate({
-    //                 inputRange: [0, 1],
-    //                 outputRange: [0, 1],
-    //                 extrapolate: 'clamp',
-    //             }),
-    //             next
-    //                 ? next.progress.interpolate({
-    //                     inputRange: [0, 1],
-    //                     outputRange: [0, 1],
-    //                     extrapolate: 'clamp',
-    //                 })
-    //                 : 0
-    //         ),
-    //         inverted
-    //     );
-
-    //     return {
-    //         cardStyle: {
-    //             transform: [
-    //                 {
-    //                     translateX: translateX.interpolate({
-    //                         inputRange: [0, 1],
-    //                         outputRange: [screen.width, 0],
-    //                     }),
-    //                 },
-    //             ],
-    //         },
-    //     };
-    // };
 
     const CustomTabLabel = ({ focused, label }) => {
         return <Text style={{ color: focused ? '#008B45' : '#696969' }}>{label}</Text>;

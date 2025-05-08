@@ -33,9 +33,9 @@ const SettingScreen = () => {
   useFocusEffect(
     useCallback(() => {
       const fetchData = async () => {
-        await getToken(); 
+        await getToken();
         if (token) {
-          await fetchUserName(); 
+          await fetchUserName();
         }
       };
       fetchData();
@@ -44,7 +44,7 @@ const SettingScreen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getToken(); 
+      await getToken();
       if (token) {
         await fetchUserName();
       }
@@ -66,52 +66,44 @@ const SettingScreen = () => {
 
   const fetchUserName = async () => {
     if (!token) {
-<<<<<<< HEAD
-=======
-        console.error('Token is missing. Cannot fetch user information.');
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
-        setErrorModalMessage('Token không hợp lệ. Vui lòng đăng nhập lại.');
-        setErrorModal(true);
-        return;
-    }
+      setErrorModalMessage('Token không hợp lệ. Vui lòng đăng nhập lại.');
+      setErrorModal(true);
+      return;
+  }
 
     try {
-<<<<<<< HEAD
-        const response = await fetch(`http://10.0.2.2:3000/api/auth/getUserName?token=${token}`);
-=======
-        const response = await fetch(`http://10.0.2.2:3000/getUserName?token=${token}`);
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
-        const data = await response.json();
+      const response = await fetch(`http://10.0.2.2:3000/api/auth/getUserName?token=${token}`);
+      const data = await response.json();
 
-        if (response.status === 200) {
-            setFirstName(data.firstname);
-            setLastName(data.lastname);
-            setEmail(data.email);
-        } else {
-            switch (response.status) {
-                case 400:
-                    setErrorModalMessage(data.message || 'Thiếu token trong yêu cầu.');
-                    break;
-                case 401:
-                    setErrorModalMessage(data.message || 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.');
-                    break;
-                case 404:
-                    setErrorModalMessage(data.message || 'Không tìm thấy người dùng. Vui lòng đăng nhập lại.');
-                    break;
-                case 500:
-                    setErrorModalMessage(data.message || 'Lỗi máy chủ. Vui lòng thử lại sau.');
-                    break;
-                default:
-                    setErrorModalMessage('Lỗi không xác định khi lấy thông tin người dùng.');
-            }
-            setErrorModal(true);
+      if (response.status === 200) {
+        setFirstName(data.firstname);
+        setLastName(data.lastname);
+        setEmail(data.email);
+      } else {
+        switch (response.status) {
+          case 400:
+            setErrorModalMessage(data.message || 'Thiếu token trong yêu cầu.');
+            break;
+          case 401:
+            setErrorModalMessage(data.message || 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.');
+            break;
+          case 404:
+            setErrorModalMessage(data.message || 'Không tìm thấy người dùng. Vui lòng đăng nhập lại.');
+            break;
+          case 500:
+            setErrorModalMessage(data.message || 'Lỗi máy chủ. Vui lòng thử lại sau.');
+            break;
+          default:
+            setErrorModalMessage('Lỗi không xác định khi lấy thông tin người dùng.');
         }
-    } catch (error) {
-        console.error('Lỗi khi gửi yêu cầu:', error.message);
-        setErrorModalMessage('Không thể kết nối đến server. Vui lòng kiểm tra mạng và thử lại.');
         setErrorModal(true);
+      }
+    } catch (error) {
+      console.error('Lỗi khi gửi yêu cầu:', error.message);
+      setErrorModalMessage('Không thể kết nối đến server. Vui lòng kiểm tra mạng và thử lại.');
+      setErrorModal(true);
     }
-};
+  };
 
   const handleSignOut = async () => {
     try {
@@ -144,11 +136,11 @@ const SettingScreen = () => {
           confirmPassword,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       showModal(data.message || 'Có lỗi xảy ra.');
-      
+
       if (response.ok) {
         setPasswordModalVisible(false);
         setOldPassword('');
@@ -160,7 +152,7 @@ const SettingScreen = () => {
       showModal('Có lỗi xảy ra. Vui lòng thử lại.');
     }
   };
-  
+
   const handleCancelPasswordChange = () => {
     setOldPassword('');
     setNewPassword('');
@@ -346,13 +338,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
-    backgroundColor: '#CCCCCC', 
+    backgroundColor: '#CCCCCC',
     padding: 10,
     borderRadius: 10,
     marginTop: 20,
@@ -361,7 +353,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     resizeMode: 'contain',
-    borderRadius: 30, 
+    borderRadius: 30,
   },
   headerName: {
     marginLeft: 20,
@@ -370,11 +362,11 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#000000', 
+    color: '#000000',
   },
   email: {
     fontSize: 14,
-    color: '#000000', 
+    color: '#000000',
   },
   chanegeNameButton: {
     backgroundColor: '#008B45',
@@ -418,19 +410,19 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonNameText: {
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
     marginLeft: 50,
   },
   buttonPasswordText: {
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
     marginLeft: 50,
   },
   buttonText: {
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
   },
@@ -449,11 +441,7 @@ const styles = StyleSheet.create({
   modalContent: {
     width: 320,
     padding: 20,
-<<<<<<< HEAD
     backgroundColor: '#FFFFFF',
-=======
-    backgroundColor: '#FFFFFF', 
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -475,7 +463,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     marginBottom: 12,
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
   },
   modalButton: {
     backgroundColor: '#008B45',
@@ -485,7 +473,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   modalButtonText: {
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
   },
@@ -506,7 +494,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: '#FFFFFF',
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',

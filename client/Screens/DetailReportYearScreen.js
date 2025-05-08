@@ -28,11 +28,7 @@ const DetailReportYearScreen = () => {
     const chartData = months.map(m => ({
         value: type === 'Expense' ? -m.amount : m.amount,
         label: `T${m.month}`,
-<<<<<<< HEAD
         frontColor: m.amount >= 0 ? '#008B45' : 'red',
-=======
-        frontColor: m.amount >= 0 ? '#008B45' : 'red', 
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     }));
 
 
@@ -102,21 +98,13 @@ const DetailReportYearScreen = () => {
                         noOfSections={5}
                         maxValue={Math.max(...months.map(m => Math.abs(m.amount)))}
                         isAnimated
-<<<<<<< HEAD
                         yAxisThickness={0}
                         xAxisThickness={2}
                         width={Dimensions.get('window').width * 1.55}
-=======
-                        showValuesAsTopLabel
-                        yAxisThickness={0}
-                        xAxisThickness={2}
-                        width={Dimensions.get('window').width * 1.2}
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
                     />
 
                 </ScrollView>
             </View>
-
 
             <View style={styles.bodyContainer}>
                 <Text style={styles.totalText}>

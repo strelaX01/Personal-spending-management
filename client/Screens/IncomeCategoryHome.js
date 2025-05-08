@@ -75,10 +75,6 @@ const IncomeCategoryHome = () => {
     }, [token])
   );
 
-<<<<<<< HEAD
-=======
-
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
   const closeAllSwipeables = useCallback(() => {
     if (openSwipeableId.current) {
       const swipeableToClose = swipeableRefs.current[openSwipeableId.current];
@@ -369,11 +365,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#d32f2f',
   },
   actionText: {
-<<<<<<< HEAD
     color: '#FFFFFF', 
-=======
-    color: '#FFFFFF',
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     fontSize: 14,
     fontWeight: '600',
     marginLeft: 8,

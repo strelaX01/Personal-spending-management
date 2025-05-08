@@ -47,32 +47,22 @@ const LoginScreen = () => {
                 email: email,
                 password: password,
             };
-<<<<<<< HEAD
 
             const response = await axios.post('http://10.0.2.2:3000/api/auth/login', user);
-=======
-    
-            const response = await axios.post('http://10.0.2.2:3000/login', user);
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
             const { token } = response.data;
-    
+
             await AsyncStorage.setItem('token', token);
-    
+
             setIsLoggingIn(false);
             navigation.navigate('BottomTabs');
         } catch (err) {
             setIsLoggingIn(false);
 
             if (err.response) {
-<<<<<<< HEAD
-=======
-
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
                 if (err.response.status === 402) {
                     setModalMessage('Tài khoản chưa được xác thực.');
                     setModalVisible(true);
                     return;
-<<<<<<< HEAD
                 } else if (err.response.status === 502) {
                     setErrorModalMessage('Lỗi máy chủ, vui lòng thử lại sau.');
                     setErrorModal(true);
@@ -80,25 +70,14 @@ const LoginScreen = () => {
                 }
 
                 setModalMessage(err.response.data.message || 'Đã xảy ra lỗi.');
-=======
-                }
-    
-                setModalMessage(err.response.data.message);
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
                 setModalVisible(true);
-            } else if (err.request) {
-                setErrorModalMessage('Lỗi máy chủ, vui lòng thử lại sau.');
-                setErrorModal(true);
             } else {
-<<<<<<< HEAD
                 setErrorModalMessage('Không thể kết nối đến máy chủ. Vui lòng kiểm tra mạng.');
-=======
-                setErrorModalMessage('Có gì đó không ổn. Vui lòng thử lại.');
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
                 setErrorModal(true);
             }
         }
     };
+
 
 
     const handleForgotPassword = () => {

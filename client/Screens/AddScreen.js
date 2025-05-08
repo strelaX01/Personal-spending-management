@@ -225,11 +225,7 @@ const AddScreen = () => {
         token: token,
       };
 
-<<<<<<< HEAD
       const response = await axios.post(`http://10.0.2.2:3000/api/transaction/AddIncome`, newIncome);
-=======
-      const response = await axios.post(`http://10.0.2.2:3000/AddIncome`, newIncome);
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
 
       if (response.status === 201) {
         setErrorModalMessage('Thu nhập đã được thêm thành công!');
@@ -274,12 +270,7 @@ const AddScreen = () => {
         token: token,
       };
 
-<<<<<<< HEAD
       const response = await axios.post(`http://10.0.2.2:3000/api/transaction/confirmIncome`, newIncome);
-=======
-      const response = await axios.post(`http://10.0.2.2:3000/confirmIncome`, newIncome);
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
-
 
       if (response.status === 201) {
         setConfirmationMessage('Thu nhập đã được thêm thành công sau khi xác nhận!');
@@ -312,12 +303,7 @@ const AddScreen = () => {
             token: token,
         };
 
-<<<<<<< HEAD
         const response = await axios.post(`http://10.0.2.2:3000/api/transaction/AddExpense`, newExpense);
-=======
-        const response = await axios.post(`http://10.0.2.2:3000/AddExpense`, newExpense);
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
-
         if (response.status === 201) {
             setErrorModalMessage('Chi tiêu đã được thêm thành công!');
             setErrorModal(true);
@@ -359,13 +345,7 @@ const AddScreen = () => {
         token: token,
       };
 
-<<<<<<< HEAD
       const response = await axios.post(`http://10.0.2.2:3000/api/transaction/confirmExpense`, newExpense);
-=======
-      const response = await axios.post(`http://10.0.2.2:3000/confirmExpense`, newExpense);
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
-
-
       if (response.status === 201) {
         setConfirmationMessage('Chi tiêu đã được thêm thành công sau khi xác nhận!');
         setConfirmationModalVisible(true);
@@ -833,7 +813,6 @@ const styles = StyleSheet.create({
 
   },
   incomeInput: {
-<<<<<<< HEAD
     color: '#000000',
     padding: 15,
     fontSize: 16,
@@ -842,7 +821,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#CCCCCC', 
-=======
     color: '#000000', 
     padding: 15,
     fontSize: 16,
@@ -851,7 +829,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#CCCCCC',
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     marginLeft: 10,
   },
   categoryContainer: {
@@ -949,19 +926,16 @@ const styles = StyleSheet.create({
 
   },
   noteInput: {
-<<<<<<< HEAD
     color: '#000000', 
     padding: 15,
     fontSize: 16,
     width: '90%',
     backgroundColor: '#DDDDDD', 
-=======
     color: '#000000',
     padding: 15,
     fontSize: 16,
     width: '90%',
     backgroundColor: '#DDDDDD',
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#CCCCCC', 
@@ -993,11 +967,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-<<<<<<< HEAD
     backgroundColor: '#FFFFFF',
-=======
-    backgroundColor: '#FFFFFF', 
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',

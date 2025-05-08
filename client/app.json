@@ -6,11 +6,7 @@
     "slug": "client",
     "version": "1.0.5",
     "orientation": "portrait",
-<<<<<<< HEAD
     "icon": "./assets/Logo/PennyRoot-Logo2.png",
-=======
-    "icon": "./assets/Logo/PennyRoot-Logo.png",
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

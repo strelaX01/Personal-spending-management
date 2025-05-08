@@ -411,20 +411,12 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
   headerText: {
-<<<<<<< HEAD
     color: '#000000',
-=======
-    color: '#000000', 
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     fontSize: 18,
     fontWeight: 'bold',
   },
   addText: {
-<<<<<<< HEAD
     color: '#000000', 
-=======
-    color: '#000000',
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     fontSize: 18,
     fontWeight: 'bold',
   },
@@ -555,11 +547,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-<<<<<<< HEAD
     backgroundColor: '#FFFFFF',
-=======
-    backgroundColor: '#FFFFFF', 
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',

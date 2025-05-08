@@ -46,7 +46,7 @@ const PieChartView = React.memo(({ data, centerLabel }) => {
                   key={index}
                   x={centroid[0]}
                   y={centroid[1]}
-                  fill={data.color} 
+                  fill={data.color}
                   textAnchor="middle"
                   fontSize="12"
                   fontWeight="bold"
@@ -71,12 +71,12 @@ const ItemList = React.memo(({ items, planItems, activeTab, handleItemPress, typ
 
   const textColor = type === 'Income' ? '#008B45' : '#FF0000';
   const prefix = type === 'Income' ? '+' : '-';
-  
+
   const categoryMap = new Map();
   items.forEach(item => {
     if (!categoryMap.has(item.category_id)) {
       const matchingPlan = planItems?.find(plan => plan.category_id === item.category_id);
-      
+
       categoryMap.set(item.category_id, {
         category_id: item.category_id,
         category_name: item.category_name,
@@ -86,7 +86,7 @@ const ItemList = React.memo(({ items, planItems, activeTab, handleItemPress, typ
       });
     }
   });
-  
+
   const categories = Array.from(categoryMap.values());
 
   return (
@@ -94,12 +94,12 @@ const ItemList = React.memo(({ items, planItems, activeTab, handleItemPress, typ
       {categories.map((category, index) => {
         const matchingItems = items.filter(item => item.category_id === category.category_id);
         const totalAmount = matchingItems.reduce((sum, item) => sum + (item.amount || 0), 0);
-        
+
         let percentageText;
         if (category.planAmount > 0) {
           percentageText = `(${((totalAmount / category.planAmount) * 100).toFixed(2)}%)`;
         } else if (totalAmount > 0) {
-          percentageText = "(--)"; 
+          percentageText = "(--)";
         } else {
           percentageText = "(0%)";
         }
@@ -108,7 +108,7 @@ const ItemList = React.memo(({ items, planItems, activeTab, handleItemPress, typ
           <TouchableOpacity
             key={index}
             style={styles.listItem}
-            onPress={() => handleItemPress({...category, amount: category.planAmount}, type)}
+            onPress={() => handleItemPress({ ...category, amount: category.planAmount }, type)}
           >
             <View style={styles.listItemRow}>
               <Ionicons name={category.category_icon || 'help-circle-outline'} size={30} color={category.category_color || '#cccccc'} />
@@ -116,11 +116,7 @@ const ItemList = React.memo(({ items, planItems, activeTab, handleItemPress, typ
                 <Text style={styles.listItemText}>{category.category_name || 'Unknown'}</Text>
                 {activeTab === 'Monthly' && (
                   <Text style={styles.listItemPlan}>
-<<<<<<< HEAD
                     Kế hoạch: {(category.planAmount || 0).toLocaleString('vi-VN')}
-=======
-                    Kế hoạch: {(planItem.amount || 0).toLocaleString('vi-VN')}
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
                   </Text>
                 )}
               </View>
@@ -781,11 +777,7 @@ export default ReportScreen
 
 const styles = StyleSheet.create({
   container: {
-<<<<<<< HEAD
     backgroundColor: '#FFFFFF',
-=======
-    backgroundColor: '#FFFFFF', 
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     flex: 1,
     alignItems: 'center',
   },
@@ -794,7 +786,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     width: '75%',
     justifyContent: 'space-between',
-    backgroundColor: '#CCCCCC', 
+    backgroundColor: '#CCCCCC',
     padding: 5,
     borderRadius: 30,
     elevation: 3,
@@ -824,12 +816,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   activeTabText: {
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     fontWeight: 'bold',
   },
   tabText: {
     fontSize: 14,
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
     fontWeight: '600',
   },
   mainContainer: {
@@ -839,253 +831,238 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 20,
     marginTop: 15,
-<<<<<<< HEAD
     backgroundColor: '#E0E0E0',
-=======
-    backgroundColor: '#E0E0E0', 
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
     elevation: 3,
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowRadius: 5,
     shadowOffset: { width: 0, height: 2 },
   },
-  headerContainer: {
-    width: '100%',
-    padding: 10,
-    alignItems: 'center',
-    backgroundColor: '#E0E0E0', 
-  },
-  datePickerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 10,
-    width: '100%',
-  },
-  backDateIcon: {
-    color: '#000000', 
-  },
-  forwardDateIcon: {
-    color: '#000000', 
-  },
-  dateDisplay: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#CCCCCC',
-    borderRadius: 10,
-    padding: 5,
-    width: '50%',
-    justifyContent: 'center',
-  },
-  dateText: {
-    color: '#000000', 
-    fontSize: 18,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  pickerContainer: {
-    backgroundColor: '#FFFFFF', 
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-  closeButton: {
-    marginTop: 20,
-    color: '#008B45',
-    fontSize: 16,
-  },
-  infoContainer: {
-    marginTop: 10,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    padding: 10,
-    backgroundColor: '#CCCCCC', 
-    borderRadius: 10,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
-  },
-  expenseTitle: {
-    color: '#000000', 
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  expenseValue: {
-    color: '#FF0000',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  incomeTitle: {
-    color: '#000000', 
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  incomeValue: {
-    color: '#008B45',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  totalTitle: {
-    color: '#000000', 
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  totalValue: {
-    color: '#000000', 
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  subTabContainer: {
-    flexDirection: 'row',
-    marginTop: 20,
-    width: '100%',
-    justifyContent: 'space-around',
-    shadowColor: '#000',
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 2 },
-    backgroundColor: '#CCCCCC', 
-    borderRadius: 20,
-  },
-  subTabButton: {
-    flex: 1,
-    paddingVertical: 8,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
 
-  },
-  activeSubTab: {
-    backgroundColor: '#00A86B',
-    elevation: 2,
-    shadowColor: '#00FF88',
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 2 },
-  
-  },
-  chartContainer: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  listContainer: {
-    marginTop: 20,
-    width: '100%',
-    maxHeight: 200,
-<<<<<<< HEAD
-    backgroundColor: '#E0E0E0', 
-=======
-    backgroundColor: '#E0E0E0',
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
-  },
-  listItem: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#000000',
-  },
-  listItemRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  listItemTextContainer: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  listItemText: {
-    color: '#000000', 
-    fontSize: 16,
-    flex: 1,
-    marginLeft: 10,
-    fontWeight: 'bold',
-  },
-  listItemAmountContainer: {
-    alignItems: 'flex-end',
-  },
-  listItemAmount: {
-    color: '#000000', 
-    fontSize: 16,
-  },
-  listItemPercentage: {
-    color: '#000000',
-    marginLeft: 10,
-  },
-  listItemPlan: {
-<<<<<<< HEAD
-    color: '#000000',
-=======
-    color: '#000000', 
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
-    fontSize: 14,
-    marginLeft: 10,
-  },
-  noDataText: {
-    color: '#000000', 
-    fontSize: 16,
-    textAlign: 'center',
-    marginTop: 20,
-  },
-  summaryContainer: {
-    marginTop: 20,
-    width: '100%',
-    maxHeight: 200,
-<<<<<<< HEAD
-    backgroundColor: '#E0E0E0', 
-=======
-    backgroundColor: '#E0E0E0',
->>>>>>> eace508c10eced53687afe40a8a2bbaaa287535a
-  },
-  summaryItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#CCCCCC', 
-  },
-  summaryItemText: {
-    color: '#000000', 
-    fontSize: 16,
-    flex: 1,
-    marginLeft: 10,
-  },
-  summaryItemAmount: {
-    color: '#000000', 
-    fontSize: 16,
-  },
-  categoriesContainer: {
-    marginTop: 20,
-    width: '100%',
-    maxHeight: 200,
-    backgroundColor: '#E0E0E0', 
-  },
-  categoryItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#CCCCCC', 
-  },
-  categoryText: {
-    color: '#000000', 
-    fontSize: 16,
-    marginLeft: 10,
-  },
-  listPlanAmount: {
-    fontSize: 16,
-  },
-});
+    headerContainer: {
+      width: '100%',
+      padding: 10,
+      alignItems: 'center',
+      backgroundColor: '#E0E0E0',
+    },
+    datePickerContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginTop: 10,
+      width: '100%',
+    },
+    backDateIcon: {
+      color: '#000000',
+    },
+    forwardDateIcon: {
+      color: '#000000',
+    },
+    dateDisplay: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderWidth: 1,
+      borderColor: '#CCCCCC',
+      borderRadius: 10,
+      padding: 5,
+      width: '50%',
+      justifyContent: 'center',
+    },
+    dateText: {
+      color: '#000000',
+      fontSize: 18,
+    },
+    modalContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 22,
+    },
+    pickerContainer: {
+      backgroundColor: '#FFFFFF',
+      padding: 20,
+      borderRadius: 10,
+      alignItems: 'center',
+    },
+    closeButton: {
+      marginTop: 20,
+      color: '#008B45',
+      fontSize: 16,
+    },
+    infoContainer: {
+      marginTop: 10,
+      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '100%',
+      padding: 10,
+      backgroundColor: '#CCCCCC',
+      borderRadius: 10,
+      elevation: 3,
+      shadowColor: '#000',
+      shadowOpacity: 0.1,
+      shadowRadius: 5,
+      shadowOffset: { width: 0, height: 2 },
+    },
+    expenseTitle: {
+      color: '#000000',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    expenseValue: {
+      color: '#FF0000',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    incomeTitle: {
+      color: '#000000',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    incomeValue: {
+      color: '#008B45',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    totalTitle: {
+      color: '#000000',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    totalValue: {
+      color: '#000000',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    subTabContainer: {
+      flexDirection: 'row',
+      marginTop: 20,
+      width: '100%',
+      justifyContent: 'space-around',
+      shadowColor: '#000',
+      shadowOpacity: 0.15,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
+      backgroundColor: '#CCCCCC',
+      borderRadius: 20,
+    },
+    subTabButton: {
+      flex: 1,
+      paddingVertical: 8,
+      borderRadius: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'transparent',
+
+    },
+    activeSubTab: {
+      backgroundColor: '#00A86B',
+      elevation: 2,
+      shadowColor: '#00FF88',
+      shadowOpacity: 0.2,
+      shadowRadius: 5,
+      shadowOffset: { width: 0, height: 2 },
+
+    },
+    chartContainer: {
+      marginTop: 20,
+      alignItems: 'center',
+    },
+    listContainer: {
+      marginTop: 20,
+      width: '100%',
+      maxHeight: 200,
+      backgroundColor: '#E0E0E0',
+    },
+    listItem: {
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignItems: 'flex-start',
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: '#000000',
+    },
+    listItemRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    listItemTextContainer: {
+      flex: 1,
+      marginLeft: 10,
+    },
+    listItemText: {
+      color: '#000000',
+      fontSize: 16,
+      flex: 1,
+      marginLeft: 10,
+      fontWeight: 'bold',
+    },
+    listItemAmountContainer: {
+      alignItems: 'flex-end',
+    },
+    listItemAmount: {
+      color: '#000000',
+      fontSize: 16,
+    },
+    listItemPercentage: {
+      color: '#000000',
+      marginLeft: 10,
+    },
+    listItemPlan: {
+      color: '#000000',
+      fontSize: 14,
+      marginLeft: 10,
+    },
+    noDataText: {
+      color: '#000000',
+      fontSize: 16,
+      textAlign: 'center',
+      marginTop: 20,
+    },
+    summaryContainer: {
+      marginTop: 20,
+      width: '100%',
+      maxHeight: 200,
+      backgroundColor: '#E0E0E0',
+    },
+    summaryItem: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: '#CCCCCC',
+    },
+    summaryItemText: {
+      color: '#000000',
+      fontSize: 16,
+      flex: 1,
+      marginLeft: 10,
+    },
+    summaryItemAmount: {
+      color: '#000000',
+      fontSize: 16,
+    },
+    categoriesContainer: {
+      marginTop: 20,
+      width: '100%',
+      maxHeight: 200,
+      backgroundColor: '#E0E0E0',
+    },
+    categoryItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: '#CCCCCC',
+    },
+    categoryText: {
+      color: '#000000',
+      fontSize: 16,
+      marginLeft: 10,
+    },
+    listPlanAmount: {
+      fontSize: 16,
+    },
+  });
