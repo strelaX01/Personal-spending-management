@@ -173,14 +173,20 @@ const HomeScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      getToken();
-      if (token) {
-        fetchData(activeTab);
-        fetchTotalAmount();
-      }
+      const refreshData = async () => {
+        await getToken();
+        if (token) {
+          if (activeTab === 'Income') {
+            await fetchTotalAmount();
+          }
+          fetchData(activeTab);
+          fetchTotalAmount();
+        }
+      };
+      
+      refreshData();
     }, [token, getToken, fetchData, fetchTotalAmount, activeTab])
   );
-
 
   const totalPlanAmountMemo = useMemo(() => {
     if (activeTab === 'Expense' && expensePlanData) {
@@ -333,6 +339,7 @@ const HomeScreen = () => {
       setOpenItemId(null);
     }
   }, [activeTab, navigation, openItemId, fetchTotalAmount, fetchData]);
+
 
   const handleDelete = useCallback((item) => {
     setItemToDelete(item);
