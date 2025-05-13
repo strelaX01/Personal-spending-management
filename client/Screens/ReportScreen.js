@@ -339,7 +339,6 @@ const ReportScreen = () => {
       const totalIncome = calculateTotalAmount(incomes);
       setMonthlyIncome(totalIncome.toLocaleString('vi-VN'));
     } catch (error) {
-      Alert.alert('Error', 'Failed to fetch income data');
       setIncomeData([]);
       setMonthlyIncome('0');
     }
@@ -360,7 +359,6 @@ const ReportScreen = () => {
       const totalExpense = calculateTotalAmount(expenses);
       setAnnualExpense(totalExpense.toLocaleString('vi-VN'));
     } catch (error) {
-      Alert.alert('Error', 'Failed to fetch annual expense data');
       setExpenseData([]);
       setAnnualExpenseCategories([]);
       setAnnualExpense('0');

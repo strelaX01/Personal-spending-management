@@ -175,17 +175,20 @@ const HomeScreen = () => {
     useCallback(() => {
       const refreshData = async () => {
         await getToken();
+        
         if (token) {
-          if (activeTab === 'Income') {
+          // Fetch data for the active tab
+          fetchData(activeTab);
+          
+          // Only fetch total amount once
+          if (activeTab === 'Income' || !totalAmount) {
             await fetchTotalAmount();
           }
-          fetchData(activeTab);
-          fetchTotalAmount();
         }
       };
       
       refreshData();
-    }, [token, getToken, fetchData, fetchTotalAmount, activeTab])
+    }, [token, getToken, fetchData, fetchTotalAmount, activeTab, totalAmount])
   );
 
   const totalPlanAmountMemo = useMemo(() => {
