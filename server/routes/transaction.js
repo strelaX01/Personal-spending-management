@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const db = require('../config/db');
@@ -402,7 +403,7 @@ router.post('/confirmEditIncome', (req, res) => {
 });
 
 router.get('/getIncome', (req, res) => {
-    const { token, monthYear } = req.query;
+    const { token, monthYear } = req.query; 
 
     const [month, year] = monthYear.split('-').map(Number);
 
@@ -433,6 +434,7 @@ router.get('/getIncome', (req, res) => {
         return res.status(500).json({ message: 'Lỗi server' });
     }
 });
+
 
 router.get('/getExpense', (req, res) => {
     const { token, monthYear } = req.query;
@@ -465,6 +467,7 @@ router.get('/getExpense', (req, res) => {
         return res.status(500).json({ message: 'Lỗi server' });
     }
 });
+
 
 router.get('/getTotalAmount', (req, res) => {
     const { token } = req.query;

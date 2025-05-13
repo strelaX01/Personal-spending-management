@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
@@ -8,6 +9,7 @@ const { validateEmail, validatePassword, generateVerificationCode, generateRando
 const { generateRandomName } = require('../utils/nameGenerator');
 
 const verificationCodes = new Map();
+
 
 router.post('/register', async (req, res) => {
     console.log('Đang xử lý yêu cầu đăng ký...');
@@ -224,10 +226,6 @@ router.get('/getUserName', (req, res) => {
 
 router.post('/renameUser', (req, res) => {
     const { token, firstName, lastName } = req.body;
-
-    if (!firstName || !lastName) {
-        return res.status(400).json({ message: 'Cần phải có họ và tên' });
-    }
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);

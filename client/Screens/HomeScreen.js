@@ -471,7 +471,7 @@ const HomeScreen = () => {
                 <Text style={styles.remainingtext} adjustsFontSizeToFit numberOfLines={1}>
                   {totalIncomeAmount > totalPlanAmount ? 'Thu nhập vượt kế hoạch' : 'Mục tiêu còn thiếu'}
                 </Text>
-                <Text style={[styles.totalRevenueNumber, { color: totalIncomeAmount >= totalPlanAmount ? '#000000' : '#EEB422' },
+                <Text style={[styles.totalRevenueNumber, { color: totalIncomeAmount >= totalPlanAmount ? '#000000' : '#EEB422'},
                 ]}
                   adjustsFontSizeToFit
                   numberOfLines={1}

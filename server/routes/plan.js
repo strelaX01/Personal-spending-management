@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const db = require('../config/db');

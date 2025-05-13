@@ -49,7 +49,7 @@ const LoginScreen = () => {
             };
 
             const response = await axios.post('http://10.0.2.2:3000/api/auth/login', user);
-            const { token } = response.data;
+            const { token} = response.data;
 
             await AsyncStorage.setItem('token', token);
 

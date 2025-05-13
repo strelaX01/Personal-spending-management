@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, Platform, Text, View, Animated } from 'react-native';
+import { KeyboardAvoidingView, Platform, Text, View, Animated, StyleSheet } from 'react-native';
 import React, { useEffect, useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -29,12 +29,13 @@ import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-
+import Svg, { Path } from 'react-native-svg';
+import { Dimensions } from 'react-native';
 
 const StackNavigation = () => {
     const Stack = createNativeStackNavigator();
     const Tab = createBottomTabNavigator();
-
+    const { width } = Dimensions.get('window');
 
     const CustomTabLabel = ({ focused, label }) => {
         return <Text style={{ color: focused ? '#008B45' : '#696969' }}>{label}</Text>;
@@ -46,7 +47,36 @@ const StackNavigation = () => {
                 style={{ flex: 1 }}
                 behavior={Platform.OS === 'android' ? 'height' : undefined}
                 keyboardVerticalOffset={Platform.OS === 'android' ? -100 : 0}>
-                <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: "#F0F0F0" } }}>
+                <Tab.Navigator 
+                    screenOptions={{ 
+                        tabBarStyle: { 
+                            backgroundColor: 'transparent',
+                            position: 'absolute',
+                            borderTopWidth: 0,
+                            elevation: 0,
+                            height: 60
+                        },
+                        tabBarBackground: () => (
+                            <View style={StyleSheet.absoluteFill}>
+                                <Svg width={width} height={60}>
+                                    <Path
+                                        d={`
+                                            M0,0
+                                            L${width},0
+                                            L${width},60
+                                            L0,60
+                                            L0,0
+                                            Z
+                                            M${width/2 - 30},0
+                                            A30,30 0 0 1 ${width/2 + 30},0
+                                        `}
+                                        fill="#F0F0F0"
+                                    />
+                                </Svg>
+                            </View>
+                        )
+                    }}
+                >
                     <Tab.Screen name="Home" component={HomeScreen} options={{
                         tabBarLabel: ({ focused }) => <CustomTabLabel focused={focused} label="Trang chủ" />,
                         tabBarLabelStyle: { color: "#008E97" },
@@ -108,16 +138,29 @@ const StackNavigation = () => {
                                     <View
                                         style={{
                                             position: 'absolute',
-                                            bottom: 10,
+                                            bottom: 0,
                                             alignItems: 'center',
                                             justifyContent: 'center',
+                                            width: 50,
+                                            height: 50,
+                                            backgroundColor: '#008B45',
+                                            borderRadius: 25,
+                                            top: -25,
+                                            shadowColor: '#000',
+                                            shadowOffset: {
+                                                width: 0,
+                                                height: 2,
+                                            },
+                                            shadowOpacity: 0.3,
+                                            shadowRadius: 3,
+                                            elevation: 5,
                                         }}
                                     >
                                         <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
                                             <AntDesign
-                                                name={focused ? 'pluscircle' : 'pluscircleo'}
+                                                name={focused ? 'plus' : 'plus'}
                                                 size={32}
-                                                color={focused ? '#008B45' : '#696969'}
+                                                color="#FFFFFF"
                                             />
                                         </Animated.View>
                                     </View>

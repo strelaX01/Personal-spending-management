@@ -189,7 +189,7 @@ const DatePickerModal = React.memo(({ visible, onClose, selectedDate, handleDate
 
 
 const useFinanceApi = (token) => {
-  const baseUrl = 'http://10.0.2.2:3000/api'; // Cập nhật baseUrl để bao gồm /api
+  const baseUrl = 'http://10.0.2.2:3000/api';
 
   const calculateTotalAmount = useCallback((items) => {
     if (!items || items.length === 0) return 0;
@@ -204,7 +204,7 @@ const useFinanceApi = (token) => {
     if (!token) return { data: [], total: 0 };
 
     try {
-      // Xác định tiền tố dựa trên endpoint
+
       let prefix = '';
       if (['getExpense', 'getIncome', 'getAnnualExpense', 'getAnnualIncome'].includes(endpoint)) {
         prefix = 'transaction';
@@ -752,7 +752,11 @@ const ReportScreen = () => {
           )}
         </View>
 
-        <ScrollView style={styles.listContainer}>
+        <ScrollView 
+          style={styles.listContainer}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.listContentContainer}
+        >
           {activeSubTab === 'Income' ? (
             <ItemList items={incomeData} planItems={activeTab === 'Monthly' ? incomePlanData : annualIncomeCategories} activeTab={activeTab} handleItemPress={handleItemPress} type="Income" />
           ) : (
@@ -971,8 +975,12 @@ const styles = StyleSheet.create({
     listContainer: {
       marginTop: 20,
       width: '100%',
-      maxHeight: 200,
+      maxHeight: 150,
       backgroundColor: '#E0E0E0',
+      borderRadius: 10,
+    },
+    listContentContainer: {
+      paddingVertical: 5,
     },
     listItem: {
       flexDirection: 'column',
@@ -980,12 +988,16 @@ const styles = StyleSheet.create({
       alignItems: 'flex-start',
       padding: 10,
       borderBottomWidth: 1,
-      borderBottomColor: '#000000',
+      borderBottomColor: '#E5E5E5',
+      backgroundColor: '#F0F0F0',
+      marginBottom: 5,
+      borderRadius: 8,
     },
     listItemRow: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
+      width: '100%',
     },
     listItemTextContainer: {
       flex: 1,

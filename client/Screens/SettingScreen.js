@@ -7,6 +7,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useFocusEffect } from '@react-navigation/native'
 import { useNavigation } from '@react-navigation/native';
 import ErrorModal from '../Components/ErrorModal';
+import axios from 'axios';
 
 const SettingScreen = () => {
   const [token, setToken] = useState(null);
@@ -69,38 +70,43 @@ const SettingScreen = () => {
       setErrorModalMessage('Token không hợp lệ. Vui lòng đăng nhập lại.');
       setErrorModal(true);
       return;
-  }
+    }
 
     try {
-      const response = await fetch(`http://10.0.2.2:3000/api/auth/getUserName?token=${token}`);
-      const data = await response.json();
-
-      if (response.status === 200) {
-        setFirstName(data.firstname);
-        setLastName(data.lastname);
-        setEmail(data.email);
-      } else {
-        switch (response.status) {
+      const response = await axios.get(`http://10.0.2.2:3000/api/auth/getUserName`, {
+        params: { token }
+      });
+      
+      setFirstName(response.data.firstname);
+      setLastName(response.data.lastname);
+      setEmail(response.data.email);
+      
+    } catch (error) {
+      console.error('Lỗi khi gửi yêu cầu:', error.message);
+      
+      if (error.response) {
+        switch (error.response.status) {
           case 400:
-            setErrorModalMessage(data.message || 'Thiếu token trong yêu cầu.');
+            setErrorModalMessage(error.response.data.message || 'Thiếu token trong yêu cầu.');
             break;
           case 401:
-            setErrorModalMessage(data.message || 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.');
+            setErrorModalMessage(error.response.data.message || 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.');
             break;
           case 404:
-            setErrorModalMessage(data.message || 'Không tìm thấy người dùng. Vui lòng đăng nhập lại.');
+            setErrorModalMessage(error.response.data.message || 'Không tìm thấy người dùng. Vui lòng đăng nhập lại.');
             break;
           case 500:
-            setErrorModalMessage(data.message || 'Lỗi máy chủ. Vui lòng thử lại sau.');
+            setErrorModalMessage(error.response.data.message || 'Lỗi máy chủ. Vui lòng thử lại sau.');
             break;
           default:
             setErrorModalMessage('Lỗi không xác định khi lấy thông tin người dùng.');
         }
-        setErrorModal(true);
+      } else if (error.request) {
+        setErrorModalMessage('Không thể kết nối đến server. Vui lòng kiểm tra mạng và thử lại.');
+      } else {
+        setErrorModalMessage('Có lỗi xảy ra khi thiết lập yêu cầu.');
       }
-    } catch (error) {
-      console.error('Lỗi khi gửi yêu cầu:', error.message);
-      setErrorModalMessage('Không thể kết nối đến server. Vui lòng kiểm tra mạng và thử lại.');
+      
       setErrorModal(true);
     }
   };
@@ -108,7 +114,7 @@ const SettingScreen = () => {
   const handleSignOut = async () => {
     try {
       await AsyncStorage.removeItem('token');
-      await AsyncStorage.removeItem('refreshToken');
+
       navigation.navigate('Login');
     } catch (error) {
       console.error('Error signing out: ', error);
@@ -121,27 +127,30 @@ const SettingScreen = () => {
   };
 
   const handleChangePassword = async () => {
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      showModal('Vui lòng điền đầy đủ thông tin.');
+      return;
+    } 
     try {
       const token = await AsyncStorage.getItem('token');
-      const response = await fetch(`http://10.0.2.2:3000/api/auth/ChangePassword`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({
+      const response = await axios.post(`http://10.0.2.2:3000/api/auth/ChangePassword`, 
+        {
           token,
           oldPassword,
           newPassword,
           confirmPassword,
-        }),
-      });
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          }
+        }
+      );
 
-      const data = await response.json();
+      showModal(response.data.message || 'Có lỗi xảy ra.');
 
-      showModal(data.message || 'Có lỗi xảy ra.');
-
-      if (response.ok) {
+      if (response.status === 200) {
         setPasswordModalVisible(false);
         setOldPassword('');
         setNewPassword('');
@@ -149,7 +158,11 @@ const SettingScreen = () => {
       }
     } catch (error) {
       console.error('Lỗi đổi mật khẩu: ', error);
-      showModal('Có lỗi xảy ra. Vui lòng thử lại.');
+      if (error.response) {
+        showModal(error.response.data.message || 'Có lỗi xảy ra.');
+      } else {
+        showModal('Có lỗi xảy ra. Vui lòng thử lại.');
+      }
     }
   };
 
@@ -173,31 +186,34 @@ const SettingScreen = () => {
   };
 
   const handleRename = async () => {
+    if (!firstName || !lastName || !email) {
+      showModal('Vui lòng điền đầy đủ thông tin.');
+      return;
+    }
     try {
-      const response = await fetch('http://10.0.2.2:3000/api/auth/renameUser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      const response = await axios.post('http://10.0.2.2:3000/api/auth/renameUser', 
+        {
           token,
           firstName,
           lastName,
           email,
-        }),
-      });
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        }
+      );
 
-      const data = await response.json();
-
-      if (response.ok) {
-        showModal('Đổi tên thành công.');
-        setNameModalVisible(false);
-      } else {
-        showModal(data.message || 'Đổi tên thất bại.');
-      }
+      showModal('Đổi tên thành công.');
+      setNameModalVisible(false);
     } catch (error) {
       console.error('Error renaming user: ', error);
-      showModal('Có lỗi xảy ra. Vui lòng thử lại.');
+      if (error.response) {
+        showModal(error.response.data.message || 'Đổi tên thất bại.');
+      } else {
+        showModal('Có lỗi xảy ra. Vui lòng thử lại.');
+      }
     }
   };
 
