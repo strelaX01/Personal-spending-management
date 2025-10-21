@@ -1,0 +1,28 @@
+{
+  "name": "client",
+  "slug": "client",
+  "expo": {
+    "name": "PennyRoot",
+    "slug": "client",
+    "version": "1.0.4",
+    "orientation": "portrait",
+    "icon": "./assets/Logo/PennyRoot-Logo2.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "android": {
+      "newArchEnabled": true,
+      "package": "com.strela9k35.client"
+    },
+    "androidStatusBar": {
+      "translucent": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5cd810f4-d696-49b9-b440-683c129dfc5a"
+      }
+    }
+  }
+}
