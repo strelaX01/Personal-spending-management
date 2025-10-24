@@ -8,7 +8,7 @@ const apiLimiter = rateLimit({
     success: false,
     message: 'Bạn đã gửi quá nhiều yêu cầu. Vui lòng thử lại sau 15 phút.'
   },
-  standardHeaders: true, // Thêm thông tin rate limit vào headers
+  standardHeaders: true, 
   legacyHeaders: false
 });
 

@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Áp dụng rate limit cho tất cả API route
-// app.use('/api/', apiLimiter);
+app.use('/api/', apiLimiter);
 
 // Mount routes
 app.use('/api/auth', authRoutes);
